@@ -46,7 +46,7 @@ jobs:
         run: |
           VERSION=${TAG//*release-v/}
           echo $VERSION
-          PROJECT_NAME=${REPOSITORY//*\//,,}
+          PROJECT_NAME=$(echo ${REPOSITORY//*\//} | tr "[A-Z]" "[a-z]")
           echo $PROJECT_NAME
           docker build --tag "$REGISTRY/$NAMESPACE/$PROJECT_NAME:$VERSION" .  
           docker push "$REGISTRY/$NAMESPACE/$PROJECT_NAME:$VERSION"
